@@ -6,6 +6,6 @@ class MoodsController < ApplicationController
   end
 
   def create
-    Rails.logger.info params.inspect
+    render text: params.inspect
   end
 end
