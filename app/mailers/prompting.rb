@@ -1,5 +1,5 @@
 class Prompting < ActionMailer::Base
-  default from: "moody@example.com"
+  default from: ENV['MAILGUN_SMTP_LOGIN'].sub(/postmaster/, 'moody')
 
   def email
     mail to: ENV['RECIPIENT']
