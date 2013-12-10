@@ -5,7 +5,7 @@ class Prompt < ActiveRecord::Base
     Prompt.where(responded_at: nil).first
   end
 
-  def self.send
+  def self.deliver
     if rand(SEND_CHANCE) == 1 && Prompt.outstanding
       Prompting.email.deliver
     end
