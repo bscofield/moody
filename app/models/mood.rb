@@ -4,6 +4,13 @@ class Mood < ActiveRecord::Base
       prompt.update_attribute :responded_at, Time.now
     end
 
-    Rails.logger.info raw.inspect
+    pieces = raw.split(/---------- Reply above this line ----------/)
+    notes = pieces.split(/\n+/).map(&:strip)
+
+    Mood.create({
+      recorded_at: Time.now,
+      emotion: notes[0],
+      notes: notes[1]
+    })
   end
 end
