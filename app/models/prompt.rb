@@ -1,5 +1,5 @@
 class Prompt < ActiveRecord::Base
-  SEND_CHANCE = 20
+  SEND_CHANCE = 4
 
   def self.outstanding
     Prompt.where(responded_at: nil).first
