@@ -6,7 +6,8 @@ class Prompt < ActiveRecord::Base
   end
 
   def self.deliver
-    if rand(SEND_CHANCE) == 1 && Prompt.outstanding
+    if rand(SEND_CHANCE) == 1 && !Prompt.outstanding
+      Prompt.create(requested_at: Time.now)
       Prompting.email.deliver
     end
   end
