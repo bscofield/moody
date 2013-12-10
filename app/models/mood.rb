@@ -5,7 +5,7 @@ class Mood < ActiveRecord::Base
     end
 
     pieces = raw.split(/---------- Reply above this line ----------/)
-    notes = pieces.split(/\n+/).map(&:strip)
+    notes = pieces.first.split(/\n+/).map(&:strip)
 
     Mood.create({
       recorded_at: Time.now,
