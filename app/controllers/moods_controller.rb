@@ -6,6 +6,7 @@ class MoodsController < ApplicationController
   end
 
   def create
-    render text: params.inspect
+    Mood.record(params['body-plain'])
+    render text: 'Recorded'
   end
 end
