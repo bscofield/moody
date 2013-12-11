@@ -7,6 +7,10 @@ class MoodsController < ApplicationController
 
   def create
     Mood.record(params)
-    render text: 'Recorded'
+    
+    respond_to do |format|
+      format.html { redirect_to moods_path }
+      format.json { render nothing: true   }
+    end
   end
 end
