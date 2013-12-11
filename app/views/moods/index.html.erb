@@ -1,5 +1,17 @@
 <h1>Moods</h1>
 
+<div>
+  <%= form_tag moods_path do |f| %>
+    <label for="emotion">Emotion</label>
+    <input type="text" name="emotion" id="emotion">
+
+    <label for="notes">Notes</label>
+    <textarea id="notes" name="notes"></textarea>
+
+    <button type="submit">Save</button>
+  <% end %>
+</div>
+
 <% @moods.each do |mood| %>
 <div><strong><%= mood.emotion %></strong> - <%= mood.recorded_at.to_s %></div>
 <% end %>

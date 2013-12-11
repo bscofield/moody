@@ -1,16 +1,23 @@
 class Mood < ActiveRecord::Base
-  def self.record(raw)
+  def self.record(params)
+    if raw = params.delete('body-plain')
+      pieces = raw.split(/---------- Reply above this line ----------/)
+      parts = pieces.first.split(/[\r\n]+/).map(&:strip)
+      emotion = parts[0]
+      notes = parts[1]
+    else
+      emotion = params['emotion']
+      notes = params['notes']
+    end
+    
     if prompt = Prompt.outstanding
       prompt.update_attribute :responded_at, Time.now
     end
 
-    pieces = raw.split(/---------- Reply above this line ----------/)
-    notes = pieces.first.split(/[\r\n]+/).map(&:strip)
-
     Mood.create({
       recorded_at: Time.now,
-      emotion: notes[0],
-      notes: notes[1]
+      emotion: emotion,
+      notes: notes
     })
   end
 end

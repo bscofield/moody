@@ -3,8 +3,6 @@ ruby '2.0.0'
 
 gem 'rails', '4.0.2'
 
-gem 'rails_12factor'
-
 gem 'jquery-rails'
 
 gem 'sass-rails'
@@ -19,4 +17,5 @@ end
 
 group :production do
   gem 'pg'
+  gem 'rails_12factor'
 end
