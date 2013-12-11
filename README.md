@@ -20,6 +20,7 @@ Check it out locally, then:
 
     $ heroku create
     $ heroku config:set RECIPIENT=[your email]
+    $ heroku run rake db:migrate
     $ heroku addons:add mailgun
     $ heroku addons:add scheduler
     $ heroku addons:open scheduler
