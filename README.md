@@ -30,5 +30,3 @@ Set up a scheduler task to run `rake prompt` at regular intervals.
 ## To-do
 
 * Visualization
-* Web UI for entering a mood/notes
-* API for mood data
