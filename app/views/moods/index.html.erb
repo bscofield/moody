@@ -1,18 +1,27 @@
 <h1>Moods</h1>
 
-<div>
-  <%= form_tag moods_path do |f| %>
-    <label for="emotion">Emotion</label>
-    <input type="text" name="emotion" id="emotion">
-
-    <label for="notes">Notes</label>
-    <textarea id="notes" name="notes"></textarea>
-
-    <button type="submit">Save</button>
+<div class="col-md-6">
+  <% @moods.each do |mood| %>
+    <div>
+      <strong><%= mood.emotion %></strong>
+      <%= mood.recorded_at.strftime('%Y-%m-%d %H:%M') %>
+    </div>
   <% end %>
 </div>
 
-<% @moods.each do |mood| %>
-<div><strong><%= mood.emotion %></strong> - <%= mood.recorded_at.to_s %></div>
-<% end %>
+<div class="col-md-6">
+  <%= form_tag moods_path, role: 'form' do |f| %>
+    <div class="form-group">
+      <label for="emotion">Emotion</label>
+      <input type="text" name="emotion" id="emotion" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="notes">Notes</label>
+      <textarea id="notes" name="notes" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+  <% end %>
+</div>
 
