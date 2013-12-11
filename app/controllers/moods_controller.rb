@@ -8,9 +8,10 @@ class MoodsController < ApplicationController
   def create
     Mood.record(params)
 
-    respond_to do |format|
-      format.html { redirect_to moods_path }
-      format.json { render nothing: true   }
+    if params['emotion']
+      redirect_to moods_path
+    else
+      render nothing: true
     end
   end
 end
