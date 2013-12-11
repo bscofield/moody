@@ -1,4 +1,7 @@
 class Mood < ActiveRecord::Base
+  POSITIVE_WORDS = File.readlines(Rails.root.join('db', 'positive_words.txt')).map(&:strip)
+  NEGATIVE_WORDS = File.readlines(Rails.root.join('db', 'negative_words.txt')).map(&:strip)
+
   def self.record(params)
     if raw = params.delete('body-plain')
       pieces = raw.split(/---------- Reply above this line ----------/)
@@ -9,7 +12,7 @@ class Mood < ActiveRecord::Base
       emotion = params['emotion']
       notes = params['notes']
     end
-    
+
     if prompt = Prompt.outstanding
       prompt.update_attribute :responded_at, Time.now
     end
@@ -17,7 +20,18 @@ class Mood < ActiveRecord::Base
     Mood.create({
       recorded_at: Time.now,
       emotion: emotion,
-      notes: notes
+      notes: notes,
+      score: classify(emotion)
     })
+  end
+
+  def self.classify(emotion)
+    if POSITIVE_WORDS.include?(emotion.upcase)
+      1
+    elsif NEGATIVE_WORDS.include?(emotion.upcase)
+      -1
+    else
+      0
+    end
   end
 end
