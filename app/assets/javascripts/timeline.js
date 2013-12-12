@@ -40,11 +40,11 @@ bar.append('rect')
    .style('fill', function(d) {
      switch(d.score) {
        case 1:
-         return "#3399FF"
+         return "rgba(51,153,255,0.5)"
        case -1:
-         return "#990000"
+         return "rgba(153,0,0,0.5)"
        default:
-         return "#DDDDDD"
+         return "rgba(204,204,204,0.5)"
      }
    })
    .on("mouseover", mover)
