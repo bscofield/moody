@@ -1,13 +1,14 @@
-<h1>Moods</h1>
+<div class="col-md-12">
+  <h1>Moods</h1>
 
-<div class="col-md-6">
-  <% @moods.each do |mood| %>
-    <div>
-      <strong><%= mood.emotion %></strong>
-      <%= mood.recorded_at.strftime('%Y-%m-%d %H:%M') %>
-    </div>
-  <% end %>
+  <div id="timeline"></div>
 </div>
+
+<%= javascript_tag do %>
+var data = [
+<%== @moods.map {|m| "{score: #{m.score}, emotion: \"#{m.emotion}\", notes: \"#{m.notes}\", recorded_at: new Date(\"#{m.recorded_at.to_s}\") }"}.join(', ') %>
+];
+<% end %>
 
 <div class="col-md-6">
   <%= form_tag moods_path, role: 'form' do |f| %>
