@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131213143316) do
+ActiveRecord::Schema.define(version: 20131213144334) do
+
+  create_table "emotions", force: true do |t|
+    t.string   "word"
+    t.integer  "score"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "moods", force: true do |t|
     t.datetime "recorded_at"
@@ -25,13 +32,6 @@ ActiveRecord::Schema.define(version: 20131213143316) do
   create_table "prompts", force: true do |t|
     t.datetime "requested_at"
     t.datetime "responded_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "terms", force: true do |t|
-    t.string   "word"
-    t.integer  "score"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

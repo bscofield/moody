@@ -1,2 +1,17 @@
-<h1>Emotions#index</h1>
-<p>Find me in app/views/emotions/index.html.erb</p>
+<div class="col-md-12">
+  <h1>Emotion</h1>
+
+  <% Emotion.order('word ASC').limit(10).to_a.each do |emotion| %>
+    <%= form_for emotion, role: 'form', class: 'form-horizontal' do |f| %>
+      <div class="form-group">
+        <%= f.label :score, emotion.word.humanize, class: 'col-sm-1', style: 'line-height:30px' %>
+        <div class="col-sm-1">
+        <%= f.text_field :score, class: 'form-control input-sm' %>
+        </div>
+        <div class="col-sm-1">
+          <button type="submit" class="btn-sm btn btn-primary">Save</button>
+        </div>
+      </div>
+      <% end %>
+  <% end %>
+</div>

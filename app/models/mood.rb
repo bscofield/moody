@@ -23,6 +23,6 @@ class Mood < ActiveRecord::Base
   end
 
   def self.classify(emotion)
-    Term.where(word: emotion.upcase).first.try(:score) || 0
+    Emotion.where(word: emotion.upcase).first.try(:score) || 0
   end
 end

@@ -1,5 +1,5 @@
 Moody::Application.routes.draw do
-  get "emotions/index"
+  resources :emotions, only: [:index, :update]
   resources :moods, only: [:index, :create]
 
   root 'moods#index'
