@@ -1,18 +1,30 @@
 var now = new Date();
 var width = $('#timeline').width();
 var radius = 10;
+var height = radius*6;
+var first_day = data[0].recorded_at;
+var last_day  = now;
+var hour_chunks = 6;
+var day_chunk = 3600000 * hour_chunks;
+var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+var days = [];
+for (var d=first_day.getTime(); d<last_day.getTime(); d=d+day_chunk) {
+  days.push(new Date(d));
+}
+
 
 var y = d3.scale.linear()
           .domain([-1,1])
           .range([radius*4-10, radius*2-10]);
 var x = d3.scale.linear()
-          .domain([data[0].recorded_at.getTime()-10000000, now.getTime()+10000000])
+          .domain([first_day.getTime()-10000000, last_day.getTime()+10000000])
           .range([0, width]);
 
 var timeline = d3.select('#timeline')
              .append('svg')
                  .attr('width', width)
-                 .attr('height', radius*6)
+                 .attr('height', height)
                  .append('g');
 
 
@@ -26,13 +38,31 @@ timeline.selectAll("line")
         .attr("y2", y(0))
         .style("stroke", "lightgray");
 
-                  // .attr('transform', function(d, i) { return "translate(" + x(d.recorded_at.getTime()) + ",0)"; });
-                  // attr("r", function(d) { return d / max * 14; }).
-                  // attr("transform", function() {
-                  //     tx = pane_left - 2 * margin + x(j);
-                  //     ty = height - 7 * margin - y(i);
-                  //     return "translate(" + tx + ", " + ty + ")";
-                  //   });
+timeline.selectAll(".rule")
+        .data(days)
+        .enter()
+        .append("text")
+        .attr("class", "rule")
+        .attr("x", function(d) { return x(d.getTime()); })
+        .attr("y", height-5)
+        .attr("text-anchor", "middle")
+        .style("font-size", "10px")
+        .text(function(d) {
+          theday = (months[d.getMonth()]) + " " + d.getDay();
+          thehours = d.getHours();
+          if (thehours < hour_chunks) {
+            return theday;
+          } else {
+            if (thehours > 12) {
+              return (thehours - 12)+"pm" ;
+            } else if (thehours == 12) {
+              return "12pm";
+            } else {
+              return thehours+"am";
+            }
+          }
+        });
+
 
 timeline.append('g')
         .selectAll('circle')
