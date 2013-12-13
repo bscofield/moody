@@ -6,8 +6,11 @@
 
 <%= javascript_tag do %>
 var data = [
-<%== @moods.map {|m| "{score: #{m.score}, emotion: \"#{m.emotion}\", notes: \"#{m.notes}\", recorded_at: new Date(\"#{m.recorded_at.to_s}\") }"}.join(', ') %>
+<%== @moods.map {|m| "{score: #{m.score}, emotion: \"#{m.word.humanize}\", notes: \"#{m.notes}\", recorded_at: new Date(\"#{m.recorded_at.to_s}\") }"}.join(', ') %>
 ];
+
+var yMax = <%= Emotion.maximum(:score) %>;
+var yMin = <%= Emotion.minimum(:score) %>;
 <% end %>
 
 <div class="col-md-6">
@@ -26,3 +29,6 @@ var data = [
   <% end %>
 </div>
 
+<% content_for :js do %>
+<%= javascript_include_tag :timeline %>
+<% end %>

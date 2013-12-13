@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131213151052) do
+ActiveRecord::Schema.define(version: 20131213151735) do
 
   create_table "emotions", force: true do |t|
     t.string   "word"
@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 20131213151052) do
 
   create_table "moods", force: true do |t|
     t.datetime "recorded_at"
-    t.string   "emotion"
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"

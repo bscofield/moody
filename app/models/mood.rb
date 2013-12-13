@@ -1,4 +1,16 @@
 class Mood < ActiveRecord::Base
+  belongs_to :emotion
+
+  delegate :word, :score, to: :emotion
+
+  def create
+    super
+
+    if prompt = Prompt.outstanding
+      prompt.update_attribute :responded_at, Time.now
+    end
+  end
+
   def self.record(params)
     if raw = params.delete('body-plain')
       pieces = raw.split(/---------- Reply above this line ----------/)
@@ -10,19 +22,12 @@ class Mood < ActiveRecord::Base
       notes = params['notes']
     end
 
-    if prompt = Prompt.outstanding
-      prompt.update_attribute :responded_at, Time.now
-    end
+    emotion = Emotion.where(word: emotion.upcase).first || Emotion.create(word: emotion.upcase, score: 0)
 
     Mood.create({
-      recorded_at: Time.now,
       emotion: emotion,
-      notes: notes,
-      score: classify(emotion)
+      recorded_at: Time.now,
+      notes: notes
     })
-  end
-
-  def self.classify(emotion)
-    Emotion.where(word: emotion.upcase).first.try(:score) || 0
   end
 end

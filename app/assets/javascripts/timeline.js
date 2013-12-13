@@ -1,7 +1,7 @@
 var now = new Date();
 var width = $('#timeline').width();
 var radius = 10;
-var height = radius*6;
+var height = radius*10;
 var first_day = data[0].recorded_at;
 var last_day  = now;
 var hour_chunks = 6;
@@ -15,14 +15,14 @@ for (var d=first_day.getTime(); d<last_day.getTime(); d=d+day_chunk) {
 
 
 var y = d3.scale.linear()
-          .domain([-1,1])
-          .range([radius*4-10, radius*2-10]);
+          .domain([yMin, yMax])
+          .range([radius*6, radius*3]);
 var x = d3.scale.linear()
           .domain([first_day.getTime()-10000000, last_day.getTime()+10000000])
           .range([0, width]);
 
 var timeline = d3.select('#timeline')
-             .append('svg')
+                 .append('svg')
                  .attr('width', width)
                  .attr('height', height)
                  .append('g');
@@ -34,8 +34,8 @@ timeline.selectAll("line")
         .append("line")
         .attr("x1", 10)
         .attr("x2", width-10)
-        .attr("y1", y(0))
-        .attr("y2", y(0))
+        .attr("y1", radius*4.5)
+        .attr("y2", radius*4.5)
         .style("stroke", "lightgray");
 
 timeline.selectAll(".rule")
@@ -72,17 +72,16 @@ timeline.append('g')
         .attr('r', radius)
         .attr('transform', function(d, i) {
           tx = x(d.recorded_at.getTime()) - radius;
-          ty = y(d.score);
+          ty = y(d.score*2);
           return "translate(" + tx + ", " + ty + ")";
         })
         .style('fill', function(d) {
-          switch(d.score) {
-            case 1:
-              return "rgba(51,153,255,0.5)"
-            case -1:
-              return "rgba(153,0,0,0.5)"
-            default:
-              return "rgba(153,153,153,0.5)"
+          if (d.score > 0) {
+            return "rgba(51,153,255," + (0.25 + 0.25 * d.score) + ")";
+          } else if (d.score < 0) {
+            return "rgba(153,0,0," + (0.25 + -0.25 * d.score) + ")";
+          } else {
+            return "rgba(153,153,153,0.5)";
           }
         })
         .on("mouseover", mover)
