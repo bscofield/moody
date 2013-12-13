@@ -29,6 +29,6 @@ var yMin = <%= Emotion.minimum(:score) %>;
   <% end %>
 </div>
 
-<% content_for :js do %>
-<%= javascript_include_tag :timeline %>
+<%= content_for :js do %>
+tl(data, yMax, yMin);
 <% end %>
