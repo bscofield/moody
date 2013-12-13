@@ -3,7 +3,7 @@ class Mood < ActiveRecord::Base
 
   delegate :word, :score, to: :emotion
 
-  def create
+  def self.create
     super
 
     if prompt = Prompt.outstanding
