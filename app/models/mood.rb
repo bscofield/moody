@@ -26,12 +26,6 @@ class Mood < ActiveRecord::Base
   end
 
   def self.classify(emotion)
-    if POSITIVE_WORDS.include?(emotion.upcase)
-      1
-    elsif NEGATIVE_WORDS.include?(emotion.upcase)
-      -1
-    else
-      0
-    end
+    Term.where(word: emotion.upcase).first.try(:score) || 0
   end
 end
