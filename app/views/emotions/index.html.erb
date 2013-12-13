@@ -1,7 +1,7 @@
 <div class="col-md-12">
   <h1>Emotion</h1>
 
-  <% Emotion.order('word ASC').to_a.each_with_index do |emotion, i| %>
+  <% Emotion.order('score DESC, word ASC').to_a.each_with_index do |emotion, i| %>
     <%= form_for emotion, role: 'form', class: 'form-horizontal' do |f| %>
       <div class="form-group">
         <%= f.label :score, emotion.word.humanize, class: 'col-sm-1', style: 'line-height:30px' %>
