@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131213144334) do
+ActiveRecord::Schema.define(version: 20131213151052) do
 
   create_table "emotions", force: true do |t|
     t.string   "word"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20131213144334) do
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "score",       default: 0
+    t.integer  "emotion_id"
   end
 
   create_table "prompts", force: true do |t|
