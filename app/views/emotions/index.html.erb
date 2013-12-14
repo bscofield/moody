@@ -1,6 +1,4 @@
 <div class="col-md-12">
-  <h1>Emotion</h1>
-
   <% Emotion.order('score DESC, word ASC').to_a.each_with_index do |emotion, i| %>
     <%= form_for emotion, role: 'form', class: 'form-horizontal' do |f| %>
       <div class="form-group">

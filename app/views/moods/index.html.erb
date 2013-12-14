@@ -1,7 +1,6 @@
 <div class="col-md-12">
-  <h1>Moods</h1>
-
   <div id="timeline"></div>
+  <hr>
 </div>
 
 <%= javascript_tag do %>
@@ -14,6 +13,10 @@ var yMin = <%= Emotion.minimum(:score) %>;
 <% end %>
 
 <div class="col-md-6">
+  <% if prompt = Prompt.outstanding %>
+  <p>We last asked how you were doing at <%= prompt.requested_at.strftime('%l:%M%P on %d %b') %></p>
+  <% end %>
+
   <%= form_tag moods_path, role: 'form' do |f| %>
     <div class="form-group">
       <label for="emotion">Emotion</label>
