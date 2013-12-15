@@ -49,7 +49,7 @@ function tl(data, yMax, yMin) {
           .attr("text-anchor", "middle")
           .style("font-size", "10px")
           .text(function(d) {
-            theday = (months[d.getMonth()]) + " " + d.getDay();
+            theday = (months[d.getMonth()]) + " " + d.getDate();
             thehours = d.getHours();
             if (thehours < hour_chunks) {
               return theday;
