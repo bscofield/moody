@@ -11,7 +11,7 @@ function tl(data, yMax, yMin) {
 
   var days = [];
 
-  var start_day = new Date(first_day.getYear(), first_day.getMonth(), first_day.getDate(), 0, 0);
+  var start_day = new Date(first_day.getFullYear(), first_day.getMonth(), first_day.getDate(), 0, 0);
   for (var d=start_day.getTime(); d<last_day.getTime(); d=d+day_chunk) {
     days.push(new Date(d));
   }
