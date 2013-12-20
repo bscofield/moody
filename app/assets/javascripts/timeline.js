@@ -1,8 +1,8 @@
 function tl(data, yMax, yMin) {
   var now = new Date();
   var width = $('#timeline').width();
-  var radius = 5;
-  var height = radius*10;
+  var radius = 7;
+  var height = radius*13;
   var first_day = data[0].recorded_at;
   var last_day  = now;
   var hour_chunks = 24;
