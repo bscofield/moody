@@ -1,11 +1,11 @@
 function tl(data, yMax, yMin) {
   var now = new Date();
   var width = $('#timeline').width();
-  var radius = 10;
+  var radius = 5;
   var height = radius*10;
   var first_day = data[0].recorded_at;
   var last_day  = now;
-  var hour_chunks = 12;
+  var hour_chunks = 24;
   var day_chunk = 3600000 * hour_chunks;
   var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
