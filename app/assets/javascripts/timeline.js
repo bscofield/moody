@@ -5,7 +5,7 @@ function tl(data, yMax, yMin) {
   var height = radius*13;
   var first_day = data[0].recorded_at;
   var last_day  = now;
-  var hour_chunks = 24;
+  var hour_chunks = 48;
   var day_chunk = 3600000 * hour_chunks;
   var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
