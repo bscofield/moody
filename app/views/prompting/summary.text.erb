@@ -1,8 +1,0 @@
-Here are your mood @stats for the past week!
-
-    Date    | Average | Std Dev
-================================
-<% @stats[:days].keys.sort.each do |day| -%>
- <%= day %> | <%= @stats[:days][day][:average].round(5) %> | <%= @stats[:days][day][:stdev].round(5) %>
-<% end -%>
-    Total   | <%= @stats[:week][:average].round(5) %> | <%= @stats[:week][:stdev].round(5) %>

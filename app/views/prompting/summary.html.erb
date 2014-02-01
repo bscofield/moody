@@ -1,0 +1,26 @@
+<style type="text/css">
+* { font-family: helvetica, sans-serif; }
+table { width: 50%; }
+</style>
+<p>Here are your mood @stats for the past week!</p>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Average</th>
+    <th>Std Dev</th>
+  </tr>
+
+<% @stats[:days].keys.sort.each do |day| -%>
+  <tr>
+    <td><%= day %></td>
+    <td><%= <%= @stats[:days][day][:average].round_with_precision(3) %> %></td>
+    <td><%= <%= @stats[:days][day][:stdev].round_with_precision(3) %> %></td>
+  </tr>
+<% end -%>
+  <tr>
+    <td>Total</td>
+    <td><%= <%= @stats[:week][:average].round_with_precision(3) %> %></td>
+    <td><%= <%= @stats[:week][:stdev].round_with_precision(3) %> %></td>
+  </tr>
+</table>
