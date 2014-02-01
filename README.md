@@ -25,7 +25,7 @@ Check it out locally, then:
     $ heroku addons:add scheduler
     $ heroku addons:open scheduler
 
-Set up a scheduler task to run `rake prompt` at regular intervals.
+Set up a scheduler task to run `rake prompt` at regular intervals. You may also want to run `rake summary` daily.
 
 ## To-do
 
