@@ -30,4 +30,40 @@ class Mood < ActiveRecord::Base
       notes: notes
     })
   end
+
+  def self.summarize(starting, ending)
+    starting = starting.beginning_of_day
+    ending   = ending.beginning_of_day
+
+    moods = Mood.where(['recorded_at >= ? AND recorded_at < ?', starting, ending]).load
+    by_day = moods.group_by {|mood| mood.recorded_at.strftime('%Y-%m-%d')}
+
+    avg, stdev = stats(moods)
+
+    buffer = {
+      week: {
+        average: avg,
+        stdev: stdev
+      }
+    }
+
+    by_day.each do |day, day_moods|
+      avg, stdev = stats(day_moods)
+      buffer[day] = {
+        average: avg,
+        stdev: stdev
+      }
+    end
+
+    buffer
+  end
+
+  def self.stats(moods)
+    sum = moods.map(&:score).sum
+    mean = sum / moods.length.to_f
+    var_sum = moods.inject(0) {|accum, i| accum + (i.score-mean)**2 }
+    svar = var_sum / (moods.length - 1).to_f
+
+    return mean, Math.sqrt(svar)
+  end
 end

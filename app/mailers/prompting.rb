@@ -4,4 +4,9 @@ class Prompting < ActionMailer::Base
   def email
     mail to: ENV['RECIPIENT']
   end
+
+  def summary(stats)
+    @stats = stats
+    mail to: ENV['RECIPIENT']
+  end
 end

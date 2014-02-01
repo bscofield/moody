@@ -23,4 +23,5 @@ en:
   prompting:
     email:
       subject: "How's it going?"
-
+    summary:
+      subject: "Your week in review"
