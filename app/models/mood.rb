@@ -44,12 +44,12 @@ class Mood < ActiveRecord::Base
       week: {
         average: avg,
         stdev: stdev
-      }
+      }, days: {}
     }
 
     by_day.each do |day, day_moods|
       avg, stdev = stats(day_moods)
-      buffer[day] = {
+      buffer[:days][day] = {
         average: avg,
         stdev: stdev
       }
