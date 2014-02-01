@@ -1,6 +1,8 @@
 <style type="text/css">
 * { font-family: helvetica, sans-serif; }
 table { width: 50%; }
+td { text-align: center; }
+.total td { border-top: 1px solid #ccc; padding-top: 1em; }
 </style>
 <p>Here are your mood @stats for the past week!</p>
 
@@ -18,7 +20,7 @@ table { width: 50%; }
     <td><%= @stats[:days][day][:stdev].round(3) %></td>
   </tr>
 <% end -%>
-  <tr>
+  <tr class="total">
     <td>Total</td>
     <td><%= @stats[:week][:average].round(3) %></td>
     <td><%= @stats[:week][:stdev].round(3) %></td>
