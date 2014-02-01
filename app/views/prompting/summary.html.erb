@@ -14,13 +14,13 @@ table { width: 50%; }
 <% @stats[:days].keys.sort.each do |day| -%>
   <tr>
     <td><%= day %></td>
-    <td><%= <%= @stats[:days][day][:average].round_with_precision(3) %> %></td>
-    <td><%= <%= @stats[:days][day][:stdev].round_with_precision(3) %> %></td>
+    <td><%= <%= @stats[:days][day][:average].round_with_precision(3) %></td>
+    <td><%= <%= @stats[:days][day][:stdev].round_with_precision(3) %></td>
   </tr>
 <% end -%>
   <tr>
     <td>Total</td>
-    <td><%= <%= @stats[:week][:average].round_with_precision(3) %> %></td>
-    <td><%= <%= @stats[:week][:stdev].round_with_precision(3) %> %></td>
+    <td><%= <%= @stats[:week][:average].round_with_precision(3) %></td>
+    <td><%= <%= @stats[:week][:stdev].round_with_precision(3) %></td>
   </tr>
 </table>
