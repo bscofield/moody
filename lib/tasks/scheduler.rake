@@ -8,6 +8,6 @@ end
 
 desc "This task is called weekly"
 task :summary => :environment do
-  summary_data = Mood.summarize(8.days.ago, Time.now)
+  summary_data = Mood.summarize(14.days.ago, Time.now)
   Prompting.summary(summary_data).deliver
 end

@@ -4,7 +4,7 @@ table { width: 50%; }
 td { text-align: center; }
 .total td { border-top: 1px solid #ccc; padding-top: 1em; }
 </style>
-<p>Here are your mood stats for the past week!</p>
+<p>Here are your mood stats for the <%= @stats[:days].keys.count %> days!</p>
 
 <table>
   <tr>
@@ -13,7 +13,7 @@ td { text-align: center; }
     <th>Std Dev</th>
   </tr>
 
-<% @stats[:days].keys.sort.each do |day| -%>
+<% @stats[:days].keys.sort.reverse.each do |day| -%>
   <tr>
     <td><%= day %></td>
     <td><%= @stats[:days][day][:average].round(3) %></td>
